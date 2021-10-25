@@ -11,18 +11,21 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
+    private String emailAddress;
+    private String Name;
 
-    private String userName;
-    private String password;
+    @OneToOne(fetch = FetchType.LAZY)
+    LoginInfo LoginInfo;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Rental> rentals = new ArrayList<>();
+    @OneToOne(fetch = FetchType.LAZY)
+    UserFitnessInfo userFitnessInfo;
 
     public User() {
     }
 
-    public User(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
+    public User(String Name, String emailAddress, LoginInfo LoginInfo){
+        this.Name = Name;
+        this.emailAddress = emailAddress;
+        this.LoginInfo = LoginInfo;
     }
 }
