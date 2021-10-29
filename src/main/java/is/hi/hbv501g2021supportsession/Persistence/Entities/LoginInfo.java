@@ -3,7 +3,7 @@ package is.hi.hbv501g2021supportsession.Persistence.Entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "LoginInfo")
+@Table(name = "loginInfo")
 public class LoginInfo {
     private String password;
     @Id //ekki GUID, hvernig ættum við að græja það

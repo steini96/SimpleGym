@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "UserFitnessInfo")
+@Table(name = "userFitnessInfo")
 public class UserFitnessInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +17,7 @@ public class UserFitnessInfo {
     WorkoutType workoutType;
     Difficulty difficulty;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "userFitnessInfo", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Workout> workouts = new ArrayList<>();
 
     public UserFitnessInfo() {

@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Workout")
+@Table(name = "workouts")
 public class Workout {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID; //Guid?
     private String WorkoutName; //Munum við þurfa þetta?
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "workouts", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Exercise> exercises = new ArrayList<>();
 
     public Workout(long ID, String workoutName, List<Exercise> exercises) {

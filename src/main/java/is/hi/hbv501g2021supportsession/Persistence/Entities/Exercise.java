@@ -3,7 +3,7 @@ package is.hi.hbv501g2021supportsession.Persistence.Entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Exercise")
+@Table(name = "exercises")
 public class Exercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
