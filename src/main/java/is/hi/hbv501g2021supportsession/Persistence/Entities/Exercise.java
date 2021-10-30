@@ -14,6 +14,9 @@ public class Exercise {
     public Exercise() {
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Workout workout;
+
     public Exercise(long ID, String exerciseName) {
         this.ID = ID;
         ExerciseName = exerciseName;
@@ -27,6 +30,8 @@ public class Exercise {
         return ExerciseName;
     }
 
+    public Workout getWorkout(){return workout;}
+
     public void setID(long ID) {
         this.ID = ID;
     }
@@ -34,4 +39,6 @@ public class Exercise {
     public void setExerciseName(String exerciseName) {
         ExerciseName = exerciseName;
     }
+
+    public void setWorkout(Workout workout){this.workout = workout;}
 }

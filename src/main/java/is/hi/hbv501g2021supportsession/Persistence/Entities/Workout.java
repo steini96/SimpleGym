@@ -12,13 +12,20 @@ public class Workout {
     private long ID; //Guid?
     private String WorkoutName; //Munum við þurfa þetta?
 
-    @OneToMany(mappedBy = "workouts", cascade = CascadeType.ALL, orphanRemoval = true)
+
+    @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Exercise> exercises = new ArrayList<>();
 
-    public Workout(long ID, String workoutName, List<Exercise> exercises) {
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private UserFitnessInfo userFitnessInfo;
+
+
+
+    public Workout(long ID, String workoutName , UserFitnessInfo userFitnessInfo) {
         this.ID = ID;
         WorkoutName = workoutName;
-        this.exercises = exercises;
+        this.userFitnessInfo = userFitnessInfo;
     }
 
     public Workout() {
@@ -32,9 +39,7 @@ public class Workout {
         return WorkoutName;
     }
 
-    public List<Exercise> getExercises() {
-        return exercises;
-    }
+    public UserFitnessInfo getUserFitnessInfo(){return userFitnessInfo;}
 
     public void setID(long ID) {
         this.ID = ID;
@@ -44,7 +49,5 @@ public class Workout {
         WorkoutName = workoutName;
     }
 
-    public void setExercises(List<Exercise> exercises) {
-        this.exercises = exercises;
-    }
+    public void setUserFitnessInfo(UserFitnessInfo userFitnessInfo) {this.userFitnessInfo = userFitnessInfo;}
 }

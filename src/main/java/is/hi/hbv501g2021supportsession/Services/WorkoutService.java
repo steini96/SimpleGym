@@ -2,8 +2,13 @@ package is.hi.hbv501g2021supportsession.Services;
 
 import is.hi.hbv501g2021supportsession.Persistence.Entities.Workout;
 
+import java.util.List;
+
 public interface WorkoutService {
-    Workout addWorkout(Workout workout); //adds a workout
-    void deleteWorkout(Workout workout);//deletes workout
-    Workout changeWorkout(Workout workout);//changes a workout's reps for example
+
+    Workout save(Workout workout); //adds a workout
+    void delete(Workout workout);//deletes workout
+    List<Workout> findAll();
+    Workout findByID(long id);
+
 }
