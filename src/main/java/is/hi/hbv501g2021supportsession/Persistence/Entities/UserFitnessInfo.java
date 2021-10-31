@@ -16,18 +16,18 @@ public class UserFitnessInfo {
     private enum WorkoutType{Running, Weightlifting, Swimming};
     WorkoutType workoutType;
     Difficulty difficulty;
-
+/*
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Workout> workouts = new ArrayList<>();
-
+*/
     public UserFitnessInfo() {
     }
 
-    public UserFitnessInfo(int numWeeklyWrkOut, WorkoutType workoutType, Difficulty difficulty, List<Workout> workouts) {
+    public UserFitnessInfo(int numWeeklyWrkOut, WorkoutType workoutType, Difficulty difficulty){//, List<Workout> workouts) {
         this.numWeeklyWrkOut = numWeeklyWrkOut;
         this.workoutType = workoutType;
         this.difficulty = difficulty;
-        this.workouts = workouts;
+       // this.workouts = workouts;
     }
 
     public int getNumWeeklyWrkOut() {
@@ -41,11 +41,11 @@ public class UserFitnessInfo {
     public Difficulty getDifficulty() {
         return difficulty;
     }
-
+/*
     public List<Workout> getWorkouts() {
         return workouts;
     }
-
+*/
     public void setId(Long ID) {
         this.ID = ID;
     }
@@ -66,8 +66,8 @@ public class UserFitnessInfo {
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
     }
-
+/*
     public void setWorkouts(List<Workout> workouts) {
         this.workouts = workouts;
-    }
+    }*/
 }
