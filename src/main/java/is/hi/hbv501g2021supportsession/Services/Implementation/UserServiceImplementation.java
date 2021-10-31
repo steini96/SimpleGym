@@ -1,43 +1,45 @@
 package is.hi.hbv501g2021supportsession.Services.Implementation;
 
+import is.hi.hbv501g2021supportsession.Persistence.Entities.User;
+import is.hi.hbv501g2021supportsession.Persistence.Repositories.UserRepository;
+import is.hi.hbv501g2021supportsession.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public class UserServiceImplementation implements UserService {
-    private BookRepository bookRepository;
+    private UserRepository userRepository;
 
-    /**@Autowired
-    public UserServiceImplementation(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
+    @Autowired
+    public UserServiceImplementation(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     // Todo: substitute bookRepository for userRepository when it is ready
     @Override
-    public Book saveUser(Book user) {
-        return bookRepository.save(user);
+    public User saveUser(User user) {
+        return userRepository.save(user);
     }
 
     @Override
-    public void deleteUser(Book user) {
-        bookRepository.delete(user);
+    public void deleteUser(User user) {
+        userRepository.delete(user);
     }
 
     @Override
-    public List<Book> findUserByName(String name) {
-        return bookRepository.findByTitle(name);
+    public List<User> findUserByName(String name) {
+        return userRepository.findByTitle(name);
     } // Todo: substitute with findByName when it exists
 
     @Override
-    public Book loginUser(Book user) {
-        return bookRepository.save(user);
+    public User loginUser(User user) {
+        return userRepository.save(user);
     } // substitute save with login
 
     @Override
-    public Book logoutUser(Book user) {
-        return bookRepository.save(user);
+    public User logoutUser(User user) {
+        return userRepository.save(user);
     } // substitute save with logout
 
 }
