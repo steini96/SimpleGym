@@ -1,6 +1,5 @@
 package is.hi.hbv501g2021supportsession.Controllers;
 
-import is.hi.hbv501g2021supportsession.Persistence.Entities.Book;
 import is.hi.hbv501g2021supportsession.Persistence.Entities.User;
 import is.hi.hbv501g2021supportsession.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +23,18 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginGet(Book user,Model model){
+    public String loginGet(User user,Model model){
         // Returns login page
         model.addAttribute("user",user);
         return "login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginPost(Book user, BindingResult result, Model model, HttpSession session){
+    public String loginPost(User user, BindingResult result, Model model, HttpSession session){
         if(result.hasErrors()) {
             return "login";
         }
-        Book loggedInUser = userService.loginUser(user);
+        User loggedInUser = userService.loginUser(user);
         if(loggedInUser != null) {
             session.setAttribute("LoggedInUser", loggedInUser);
             model.addAttribute("LoggedInUser", loggedInUser);
@@ -46,8 +45,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logOutGet(Book user) {
-        Book loggedOutUser = userService.logoutUser(user);
+    public String logOutGet(User user) {
+        User loggedOutUser = userService.logoutUser(user);
         // todo: catch loggedOutUser error if any
         // todo: Session stuff
         return "redirect:/login";
@@ -59,18 +58,20 @@ public class UserController {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public String signUpPost(Book user, BindingResult result, Model model) {
+    public String signUpPost(User user, BindingResult result, Model model) {
         if(result.hasErrors()) {
             return "redirect:/signup";
         }
-        List<Book> exists = userService.findUserByName(user.getTitle()); //user.getName()
+        List<User> exists = userService.findUserByName(user.getTitle()); //user.getName()
         // Catch error of username already exists
-        for (Book usr:exists) {
-            if(usr.getTitle() == user.getTitle()) {
+        String username = user.getName();
+        for (User usr:exists) {
+            if(usr.getName() == username) {
+                System.out.println("Username taken");
                 return "redirect:/signup";
             }
         }
-        Book newUser = userService.saveUser(user);
+        User newUser = userService.saveUser(user);
         return "redirect: /login";
     }
 
