@@ -62,7 +62,7 @@ public class UserController {
         if(result.hasErrors()) {
             return "redirect:/signup";
         }
-        List<User> exists = userService.findUserByName(user.getTitle()); //user.getName()
+        List<User> exists = userService.findUserByName(user.getName()); //user.getName()
         // Catch error of username already exists
         String username = user.getName();
         for (User usr:exists) {
@@ -95,4 +95,3 @@ public class UserController {
     }
 
 }
-*/

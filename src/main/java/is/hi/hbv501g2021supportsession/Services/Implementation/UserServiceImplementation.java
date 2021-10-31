@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class UserServiceImplementation implements UserService {
     private UserRepository userRepository;
 
@@ -43,4 +43,3 @@ public class UserServiceImplementation implements UserService {
     } // substitute save with logout
 
 }
-**/

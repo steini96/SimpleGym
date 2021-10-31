@@ -1,4 +1,4 @@
-/*package is.hi.hbv501g2021supportsession.Persistence.Entities;
+package is.hi.hbv501g2021supportsession.Persistence.Entities;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -51,4 +51,3 @@ public class Workout {
 
     public void setUserFitnessInfo(UserFitnessInfo userFitnessInfo) {this.userFitnessInfo = userFitnessInfo;}
 }
-*/
