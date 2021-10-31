@@ -29,7 +29,7 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public List<User> findUserByName(String name) {
-        return userRepository.findByTitle(name);
+        return userRepository.findByID(name);
     } // Todo: substitute with findByName when it exists
 
     @Override

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import is.hi.hbv501g2021supportsession.Services.WorkoutService;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,27 +21,27 @@ public class WorkoutController {
         this.workoutService = workoutService;
     }
 
-    @RequestMapping()
+    @RequestMapping(value = "/work1", method = RequestMethod.GET)
     public User checkLoginUser(HttpSession session) {
         return null;
     }
 
-    @RequestMapping()
+    @RequestMapping(value = "/work2", method = RequestMethod.GET)
     public String seeUserWorkouts(HttpSession session, Model model) {
         return "";
     }
 
-    @RequestMapping()
+    @RequestMapping(value = "/work3", method = RequestMethod.GET)
     public String addWorkoutGET(Model timeModel) {
         return "";
     }
 
-    @RequestMapping()
+    @RequestMapping(value = "/work4", method = RequestMethod.GET)
     public String addWorkPOST(HttpSession session, Workout workout) {
         return "";
     }
 
-    @RequestMapping()
+    @RequestMapping(value = "/work5", method = RequestMethod.GET)
     public String changeWorkoutPOST(HttpSession session, Workout workout, Model model) {
         return "";
     }
