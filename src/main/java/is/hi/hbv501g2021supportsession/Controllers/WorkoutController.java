@@ -1,9 +1,12 @@
 package is.hi.hbv501g2021supportsession.Controllers;
 
+import is.hi.hbv501g2021supportsession.Persistence.Entities.User;
+import is.hi.hbv501g2021supportsession.Persistence.Entities.Workout;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import is.hi.hbv501g2021supportsession.Services.WorkoutService;
 
 import javax.servlet.http.HttpSession;
 
