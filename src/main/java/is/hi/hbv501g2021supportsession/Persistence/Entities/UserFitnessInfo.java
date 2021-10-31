@@ -42,7 +42,6 @@ public class UserFitnessInfo {
     public Difficulty getDifficulty() {
         return difficulty;
     }
-
     public void setId(Long ID) {
         this.ID = ID;
     }
