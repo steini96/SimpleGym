@@ -36,11 +36,11 @@ public class UserServiceImplementation implements UserService {
     @Override
     public User loginUser(User user) {
         return userRepository.save(user);
-    } // substitute save with login
+    } // Todo: substitute save with login
 
     @Override
     public User logoutUser(User user) {
         return userRepository.save(user);
-    } // substitute save with logout
+    } // Todo: substitute save with logout
 
 }
