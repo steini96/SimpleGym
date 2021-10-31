@@ -1,8 +1,5 @@
 package is.hi.hbv501g2021supportsession.Services.Implementation;
 
-import is.hi.hbv501g2021supportsession.Persistence.Entities.Book;
-import is.hi.hbv501g2021supportsession.Persistence.Repositories.BookRepository;
-import is.hi.hbv501g2021supportsession.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +9,7 @@ import java.util.List;
 public class UserServiceImplementation implements UserService {
     private BookRepository bookRepository;
 
-    @Autowired
+    /**@Autowired
     public UserServiceImplementation(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
@@ -44,3 +41,4 @@ public class UserServiceImplementation implements UserService {
     } // substitute save with logout
 
 }
+**/

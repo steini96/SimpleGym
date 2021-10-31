@@ -6,32 +6,26 @@
 </head>
 <body>
 
-
-
-<div th:switch="${books}">
-    <h2 th:case="null">No Books yet!</h2>
+<div th:switch="${workouts}">
+    <h2 th:case="null">No Workouts yet!</h2>
     <div th:case="*">
-        <h2>Books</h2>
+        <h2>Workouts</h2>
         <table>
             <thead>
             <tr>
                 <th>Title</th>
-                <th>Description</th>
-                <th>Rating</th>
                 <th>Delete</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="book : ${books}">
-                <td th:text="${book.title}"></td>
-                <td th:text="${book.description}"></td>
-                <td th:text="${book.rating}"></td>
-                <td><a th:href="@{/delete/{id}(id=${book.ID})}">Delete</a></td>
+            <tr th:each="workout : ${workouts}">
+                <td th:text="${workout.workoutName}"></td>
+                <td><a th:href="@{/delete/{id}(id=${workout.ID})}">Delete</a></td>
             </tr>
             </tbody>
         </table>
     </div>
-    <p><a href="/addbook">Add a new book</a></p>
+    <p><a href="/addWorkout">Add a new workout</a></p>
 </div>
 
 </body>
