@@ -6,7 +6,16 @@
 </head>
 <body>
 <h1>Signup here!</h1>
-<input type="email">
+<form action="#" th:action="@{/signup}" th:object="${newUser}" method="post">
+    <h3>Username</h3>
+    <input type="text" id="username" th:field="*{Name}">
+    <h3>Email</h3>
+    <input type="email" id="email" th:field="*{emailAddress}">
+    <h3>Password</h3>
+    <div th:object="${newUser.loginInfo}">
+        <input type="password" id="password" th:field="*{password}">
+        <input type="submit" value="Signup"/>
+    </div>
 
 </body>
 </html>
