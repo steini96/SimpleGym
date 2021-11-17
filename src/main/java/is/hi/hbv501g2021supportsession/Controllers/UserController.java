@@ -23,14 +23,14 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginGet(User user,Model model){
+    public String loginPage(User user,Model model, HttpSession session){
         // Returns login page
         model.addAttribute("user",user);
         return "login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginPost(User user, BindingResult result, Model model, HttpSession session){
+    public String loginUser(User user, BindingResult result, Model model, HttpSession session){
         if(result.hasErrors()) {
             return "login";
         }
@@ -45,24 +45,28 @@ public class UserController {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logOutGet(User user) {
+    public String logOutUser(User user, HttpSession session) {
         User loggedOutUser = userService.logoutUser(user);
+        session.removeAttribute("LoggedInUser");
+
         // todo: catch loggedOutUser error if any
         // todo: Session stuff
         return "redirect:/login";
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
-    public String signUpGet() {
+    public String signUpPage(Model model) {
+        model.addAttribute("newUser",new User());
         return "signup";
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public String signUpPost(User user, BindingResult result, Model model) {
+    public String signUpUser(User user, BindingResult result, Model model) {
         if(result.hasErrors()) {
             return "redirect:/signup";
         }
-        List<User> exists = userService.findUserByName(user.getName()); //user.getName()
+
+        List<User> exists = userService.findUserByName(user.getName());
         // Catch error of username already exists
         String username = user.getName();
         for (User usr:exists) {
