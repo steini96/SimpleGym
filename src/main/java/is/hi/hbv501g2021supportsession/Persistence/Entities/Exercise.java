@@ -9,7 +9,7 @@ public class Exercise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
 
-    private String ExerciseName;
+    private String exerciseName;
 
     public Exercise() {
     }
@@ -17,9 +17,9 @@ public class Exercise {
     @ManyToOne(fetch = FetchType.LAZY)
     private Workout workout;
 
-    public Exercise(long ID, String exerciseName) {
+    public Exercise(long ID, String ExerciseName) {
         this.ID = ID;
-        ExerciseName = exerciseName;
+        exerciseName = ExerciseName;
     }
 
     public long getID() {
@@ -27,7 +27,7 @@ public class Exercise {
     }
 
     public String getExerciseName() {
-        return ExerciseName;
+        return exerciseName;
     }
 
     public Workout getWorkout(){return workout;}
@@ -36,8 +36,8 @@ public class Exercise {
         this.ID = ID;
     }
 
-    public void setExerciseName(String exerciseName) {
-        ExerciseName = exerciseName;
+    public void setExerciseName(String ExerciseName) {
+        exerciseName = ExerciseName;
     }
 
     public void setWorkout(Workout workout){this.workout = workout;}

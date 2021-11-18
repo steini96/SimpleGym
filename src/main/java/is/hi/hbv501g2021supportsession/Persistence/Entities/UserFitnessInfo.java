@@ -12,10 +12,8 @@ public class UserFitnessInfo {
     private long ID;
 
     private int numWeeklyWrkOut;
-    private enum Difficulty{Easy, Medium, Hard};
-    private enum WorkoutType{Running, Weightlifting, Swimming};
-    WorkoutType workoutType;
-    Difficulty difficulty;
+    private  Difficulty difficulty;
+    private  WorkoutType workoutType;
 
 
     @OneToMany(mappedBy = "userFitnessInfo", cascade = CascadeType.ALL, orphanRemoval = true)
