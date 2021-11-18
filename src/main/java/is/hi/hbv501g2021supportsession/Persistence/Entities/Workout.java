@@ -11,6 +11,7 @@ public class Workout {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID; //Guid?
     private String WorkoutName; //Munum við þurfa þetta?
+    private boolean done;
 
 
     @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -22,10 +23,11 @@ public class Workout {
 
 
 
-    public Workout(long ID, String workoutName , UserFitnessInfo userFitnessInfo) {
+    public Workout(long ID, String workoutName , UserFitnessInfo userFitnessInfo, boolean Done) {
         this.ID = ID;
         WorkoutName = workoutName;
         this.userFitnessInfo = userFitnessInfo;
+        this.done = Done;
     }
 
     public Workout() {
@@ -50,4 +52,11 @@ public class Workout {
     }
 
     public void setUserFitnessInfo(UserFitnessInfo userFitnessInfo) {this.userFitnessInfo = userFitnessInfo;}
+
+    public void setDone(boolean Done){
+        this.done = Done;
+    }
+    public boolean getDone(){
+        return done;
+    }
 }

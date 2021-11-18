@@ -39,6 +39,7 @@ public class User {
     }
 
     public LoginInfo getLoginInfo() {
+
         return loginInfo;
     }
 
@@ -55,6 +56,7 @@ public class User {
     }
 
     public void setLoginInfo(LoginInfo loginInfo) {
+
         this.loginInfo = loginInfo;
     }
 
