@@ -63,19 +63,19 @@ public class UserController {
         if(result.hasErrors()) {
             return "redirect:/signup";
         }
+        System.out.println("Username: " + user.getName());
+        System.out.println("Password: " + user.getLoginInfo().getPassword());
 
         User exists = userService.findUserByName(user.getName());
-        System.out.println(user.getLoginInfo().getPassword());
         // Catch error of username already exists
-        String username = user.getName();
-        System.out.println(username);
         if(exists != null) {
             System.out.println("Username taken");
-            return "redirect:/signup";
+            model.addAttribute("signupError", "Error: Username taken");
+            return signUpPage(model);
         }
         LoginInfo logInf = userService.saveLoginInfo(user.getLoginInfo());
         User newUser = userService.saveUser(user);
-        return "redirect: /login";
+        return "redirect:/login";
     }
 
     @RequestMapping(value = "/loggedin", method = RequestMethod.GET)

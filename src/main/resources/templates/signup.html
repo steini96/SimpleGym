@@ -10,6 +10,7 @@
     <div>
         <h3>Username</h3>
         <input type="text" id="username" th:field="*{Name}" required>
+        <p th:text="${signupError} ?: ''"></p>
     </div>
     <div>
         <h3>Email</h3>
