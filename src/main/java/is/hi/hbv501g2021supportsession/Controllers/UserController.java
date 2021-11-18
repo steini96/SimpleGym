@@ -1,5 +1,6 @@
 package is.hi.hbv501g2021supportsession.Controllers;
 
+import is.hi.hbv501g2021supportsession.Persistence.Entities.LoginInfo;
 import is.hi.hbv501g2021supportsession.Persistence.Entities.User;
 import is.hi.hbv501g2021supportsession.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +24,14 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginGet(User user,Model model){
+    public String loginPage(User user,Model model, HttpSession session){
         // Returns login page
         model.addAttribute("user",user);
         return "login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginPost(User user, BindingResult result, Model model, HttpSession session){
+    public String loginUser(User user, BindingResult result, Model model, HttpSession session){
         if(result.hasErrors()) {
             return "login";
         }
@@ -45,34 +46,36 @@ public class UserController {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logOutGet(User user) {
+    public String logOutUser(User user, HttpSession session) {
         User loggedOutUser = userService.logoutUser(user);
-        // todo: catch loggedOutUser error if any
-        // todo: Session stuff
+        session.removeAttribute("LoggedInUser");
         return "redirect:/login";
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
-    public String signUpGet() {
+    public String signUpPage(Model model) {
+        model.addAttribute("newUser",new User());
         return "signup";
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public String signUpPost(User user, BindingResult result, Model model) {
+    public String signUpUser(User user, BindingResult result, Model model) {
         if(result.hasErrors()) {
             return "redirect:/signup";
         }
-        List<User> exists = userService.findUserByName(user.getName()); //user.getName()
+        System.out.println("Username: " + user.getName());
+        System.out.println("Password: " + user.getLoginInfo().getPassword());
+
+        User exists = userService.findUserByName(user.getName());
         // Catch error of username already exists
-        String username = user.getName();
-        for (User usr:exists) {
-            if(usr.getName() == username) {
-                System.out.println("Username taken");
-                return "redirect:/signup";
-            }
+        if(exists != null) {
+            System.out.println("Username taken");
+            model.addAttribute("signupError", "Error: Username taken");
+            return signUpPage(model);
         }
+        LoginInfo logInf = userService.saveLoginInfo(user.getLoginInfo());
         User newUser = userService.saveUser(user);
-        return "redirect: /login";
+        return "redirect:/login";
     }
 
     @RequestMapping(value = "/loggedin", method = RequestMethod.GET)

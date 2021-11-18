@@ -38,7 +38,8 @@ public class User {
         return name;
     }
 
-    public is.hi.hbv501g2021supportsession.Persistence.Entities.LoginInfo getLoginInfo() {
+    public LoginInfo getLoginInfo() {
+
         return loginInfo;
     }
 
@@ -54,7 +55,8 @@ public class User {
         this.name = name;
     }
 
-    public void setLoginInfo(is.hi.hbv501g2021supportsession.Persistence.Entities.LoginInfo loginInfo) {
+    public void setLoginInfo(LoginInfo loginInfo) {
+
         this.loginInfo = loginInfo;
     }
 
