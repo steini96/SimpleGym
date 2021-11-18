@@ -12,10 +12,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
     private String emailAddress;
-    private String Name;
+    private String name;
 
     @OneToOne(fetch = FetchType.LAZY)
-    LoginInfo LoginInfo;
+    LoginInfo loginInfo;
 
     @OneToOne(fetch = FetchType.LAZY)
     UserFitnessInfo userFitnessInfo;
@@ -24,9 +24,9 @@ public class User {
     }
 
     public User(String Name, String emailAddress, LoginInfo LoginInfo, UserFitnessInfo userFitnessInfo){
-        this.Name = Name;
+        this.name = Name;
         this.emailAddress = emailAddress;
-        this.LoginInfo = LoginInfo;
+        this.loginInfo = LoginInfo;
         this.userFitnessInfo = userFitnessInfo;
     }
 
@@ -35,11 +35,11 @@ public class User {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
-    public is.hi.hbv501g2021supportsession.Persistence.Entities.LoginInfo getLoginInfo() {
-        return LoginInfo;
+    public LoginInfo getLoginInfo() {
+        return loginInfo;
     }
 
     public UserFitnessInfo getUserFitnessInfo() {
@@ -51,11 +51,11 @@ public class User {
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
-    public void setLoginInfo(is.hi.hbv501g2021supportsession.Persistence.Entities.LoginInfo loginInfo) {
-        LoginInfo = loginInfo;
+    public void setLoginInfo(LoginInfo loginInfo) {
+        this.loginInfo = loginInfo;
     }
 
     public void setUserFitnessInfo(UserFitnessInfo userFitnessInfo) {

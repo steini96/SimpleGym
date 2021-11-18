@@ -1,5 +1,6 @@
 package is.hi.hbv501g2021supportsession.Controllers;
 
+import is.hi.hbv501g2021supportsession.Persistence.Entities.LoginInfo;
 import is.hi.hbv501g2021supportsession.Persistence.Entities.User;
 import is.hi.hbv501g2021supportsession.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,9 +49,6 @@ public class UserController {
     public String logOutUser(User user, HttpSession session) {
         User loggedOutUser = userService.logoutUser(user);
         session.removeAttribute("LoggedInUser");
-
-        // todo: catch loggedOutUser error if any
-        // todo: Session stuff
         return "redirect:/login";
     }
 
@@ -66,15 +64,16 @@ public class UserController {
             return "redirect:/signup";
         }
 
-        List<User> exists = userService.findUserByName(user.getName());
+        User exists = userService.findUserByName(user.getName());
+        System.out.println(user.getLoginInfo().getPassword());
         // Catch error of username already exists
         String username = user.getName();
-        for (User usr:exists) {
-            if(usr.getName() == username) {
-                System.out.println("Username taken");
-                return "redirect:/signup";
-            }
+        System.out.println(username);
+        if(exists != null) {
+            System.out.println("Username taken");
+            return "redirect:/signup";
         }
+        LoginInfo logInf = userService.saveLoginInfo(user.getLoginInfo());
         User newUser = userService.saveUser(user);
         return "redirect: /login";
     }
