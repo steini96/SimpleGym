@@ -10,6 +10,8 @@ public class Exercise {
     private long ID;
 
     private String exerciseName;
+    private int repetitions;
+    private String duration;
 
     public Exercise() {
     }
@@ -17,10 +19,23 @@ public class Exercise {
     @ManyToOne(fetch = FetchType.LAZY)
     private Workout workout;
 
-    public Exercise(long ID, String ExerciseName) {
-        this.ID = ID;
+    public Exercise(String ExerciseName, int repetitions, String duration) {
         exerciseName = ExerciseName;
+        this.repetitions = repetitions;
+        this.duration = duration;
     }
+
+    public Exercise(String ExerciseName, int repetitions) {
+        exerciseName = ExerciseName;
+        this.repetitions = repetitions;
+    }
+
+    public Exercise(String ExerciseName, String duration) {
+        exerciseName = ExerciseName;
+        this.duration = duration;
+    }
+
+
 
     public long getID() {
         return ID;

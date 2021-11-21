@@ -12,6 +12,8 @@ public class Workout {
     private long ID; //Guid?
     private String WorkoutName; //Munum við þurfa þetta?
     private boolean done;
+    private  Difficulty difficulty;
+    private  WorkoutType workoutType;
 
 
     @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -23,11 +25,11 @@ public class Workout {
 
 
 
-    public Workout(long ID, String workoutName , UserFitnessInfo userFitnessInfo, boolean Done) {
-        this.ID = ID;
+    public Workout(String workoutName , UserFitnessInfo userFitnessInfo,  boolean Done, List<Exercise> exercises) {
         WorkoutName = workoutName;
         this.userFitnessInfo = userFitnessInfo;
         this.done = Done;
+        this.exercises = exercises;
     }
 
     public Workout() {
