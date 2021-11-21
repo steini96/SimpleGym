@@ -10,8 +10,9 @@ public class LoginInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
 
-    public LoginInfo(String password) {
+    public LoginInfo(String password, long ID) {
         this.password = password;
+        this.ID = ID;
     }
 
     public LoginInfo() {

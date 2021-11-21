@@ -6,7 +6,21 @@
 </head>
 <body>
 <h1>Signup here!</h1>
-<input type="email">
-
+<form action="#" th:action="@{/signup}" th:object="${newUser}" method="post">
+    <div>
+        <h3>Username</h3>
+        <input type="text" id="username" th:field="*{Name}" required>
+        <p th:text="${signupError} ?: ''"></p>
+    </div>
+    <div>
+        <h3>Email</h3>
+        <input type="email" id="email" th:field="*{emailAddress}" required>
+    </div>
+    <div th:object="${newUser.loginInfo}">
+        <h3>Password</h3>
+        <input type="password" id="password" th:field="*{password}" required>
+    </div>
+    <input type="submit" value="Signup"/>
+</form>
 </body>
 </html>

@@ -416,3 +416,6 @@ $RECYCLE.BIN/
 *_BASE_*.txt
 *_LOCAL_*.txt
 *_REMOTE_*.txt
+
+database/dbfile.mv.db
+database/dbfile.trace.db

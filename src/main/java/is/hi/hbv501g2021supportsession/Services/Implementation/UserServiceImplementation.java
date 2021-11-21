@@ -1,5 +1,6 @@
 package is.hi.hbv501g2021supportsession.Services.Implementation;
 
+import is.hi.hbv501g2021supportsession.Persistence.Entities.LoginInfo;
 import is.hi.hbv501g2021supportsession.Persistence.Entities.User;
 import is.hi.hbv501g2021supportsession.Persistence.Repositories.UserRepository;
 import is.hi.hbv501g2021supportsession.Services.UserService;
@@ -23,14 +24,19 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
+    public LoginInfo saveLoginInfo(LoginInfo loginInfo) {
+        return userRepository.save(loginInfo);
+    }
+
+    @Override
     public void deleteUser(User user) {
         userRepository.delete(user);
     }
 
     @Override
-    public List<User> findUserByName(String name) {
-        return userRepository.findByID(name);
-    } // Todo: substitute with findByName when it exists
+    public User findUserByName(String name) {
+        return userRepository.findUserByName(name);
+    }
 
     @Override
     public User loginUser(User user) {
