@@ -28,6 +28,9 @@ public class UserFitnessInfo {
         this.workoutType = workoutType;
         this.difficulty = difficulty;
     }
+    public UserFitnessInfo(int numWeeklyWrkOut) {
+        this.numWeeklyWrkOut = numWeeklyWrkOut;
+    }
 
     public int getNumWeeklyWrkOut() {
         return numWeeklyWrkOut;

@@ -22,7 +22,7 @@ public class HomeController {
         this.workoutService = workoutService;
     }
 
-    @RequestMapping("/s")
+    @RequestMapping("/")
     public String homePage(Model model){
         //Call a method in a Service Class
         List<Workout> allWorkouts = workoutService.findAll();

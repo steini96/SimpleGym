@@ -1,10 +1,13 @@
 package is.hi.hbv501g2021supportsession.Controllers;
 
 import is.hi.hbv501g2021supportsession.Persistence.Entities.User;
+import is.hi.hbv501g2021supportsession.Persistence.Entities.UserFitnessInfo;
 import is.hi.hbv501g2021supportsession.Persistence.Entities.Workout;
+import is.hi.hbv501g2021supportsession.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import is.hi.hbv501g2021supportsession.Services.WorkoutService;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,15 +19,40 @@ import java.util.List;
 public class WorkoutController {
 
     WorkoutService workoutService;
+    UserService userService;
 
     @Autowired
     public WorkoutController(WorkoutService workoutService) {
         this.workoutService = workoutService;
     }
 
-    @RequestMapping(value = "/work1", method = RequestMethod.GET)
+    @RequestMapping(value = "/checkLoggedIn", method = RequestMethod.GET)
     public User checkLoginUser(HttpSession session) {
-        return null;
+         User sessionUser = (User) session.getAttribute("LoggedInUser");
+         return sessionUser;
+    }
+
+    @RequestMapping(value = "/getUserFitnessInfo", method = RequestMethod.GET)
+    public String getUserFitnessInfo(HttpSession session, Model model) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        if (sessionUser == null){
+            return "home";
+        }
+        else if(sessionUser.getUserFitnessInfo() == null){
+            model.addAttribute("userFitnessInfo", new UserFitnessInfo());
+            return "getUserFitnessInfo";
+        }
+        return "home";
+    }
+
+    @RequestMapping(value = "/addUserFitnessInfo", method = RequestMethod.POST)
+    public String addUserFitnessInfo(UserFitnessInfo userFitnessInfo,  BindingResult result, Model model, HttpSession session){
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        sessionUser.setUserFitnessInfo(userFitnessInfo);
+        System.out.println(sessionUser.getUserFitnessInfo().getNumWeeklyWrkOut());
+        System.out.println(sessionUser.getUserFitnessInfo().getDifficulty());
+        System.out.println(sessionUser.getUserFitnessInfo().getWorkoutType());
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/work2", method = RequestMethod.GET)

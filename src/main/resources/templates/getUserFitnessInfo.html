@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a new Workout</title>
+</head>
+<body>
+
+<form action="#" th:action="@{/addUserFitnessInfo}" th:object="${userFitnessInfo}" method="post">
+    <div th:object="${userFitnessInfo}">
+        <h3>Number of weekly workouts</h3>
+        <input type="number" name="nww" id="nww" th:field="*{numWeeklyWrkOut}">
+    </div>
+    <div th:object="${userFitnessInfo}">
+        <h3>Difficulty</h3>
+        <input type="radio" name="Difficulty" id="Difficulty1" value = EASY th:field="*{difficulty}">
+        <label for="Difficulty1">Easy</label><br>
+        <input type="radio" name="Difficulty" id="Difficulty2" value = MEDIUM th:field="*{difficulty}">
+        <label for="Difficulty2">Medium</label><br>
+        <input type="radio" name="Difficulty" id="Difficulty3" value = HARD th:field="*{difficulty}">
+        <label for="Difficulty3">Hard</label><br>
+    </div>
+    <div th:object="${userFitnessInfo}">
+        <h3>Workout Type</h3>
+        <input type="radio" name="WorkoutType" id="WorkoutType1" value = RUNNING th:field="*{workoutType}">
+        <label for="WorkoutType1"> Running</label><br>
+        <input type="radio" name="WorkoutType" id="WorkoutType2" value = SWIMMING th:field="*{workoutType}">
+        <label for="WorkoutType2"> Swimming</label><br>
+        <input type="radio" name="WorkoutType" id="WorkoutType3" value = WEIGHTLIFTING th:field="*{workoutType}">
+        <label for="WorkoutType3"> Weightlifting</label><br>
+    </div>
+    <input type="submit" value="Submit"/>
+</form>
+</body>
+</html>
