@@ -10,8 +10,8 @@ public class Workout {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID; //Guid?
+
     private String WorkoutName; //Munum við þurfa þetta?
-    private boolean done;
     private  Difficulty difficulty;
     private  WorkoutType workoutType;
 
@@ -25,10 +25,9 @@ public class Workout {
 
 
 
-    public Workout(String workoutName , UserFitnessInfo userFitnessInfo,  boolean Done, List<Exercise> exercises) {
+    public Workout(String workoutName , UserFitnessInfo userFitnessInfo, List<Exercise> exercises) {
         WorkoutName = workoutName;
         this.userFitnessInfo = userFitnessInfo;
-        this.done = Done;
         this.exercises = exercises;
     }
 
@@ -55,10 +54,6 @@ public class Workout {
 
     public void setUserFitnessInfo(UserFitnessInfo userFitnessInfo) {this.userFitnessInfo = userFitnessInfo;}
 
-    public void setDone(boolean Done){
-        this.done = Done;
+
     }
-    public boolean getDone(){
-        return done;
-    }
-}
+

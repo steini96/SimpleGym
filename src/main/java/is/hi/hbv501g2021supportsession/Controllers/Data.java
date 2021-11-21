@@ -3,10 +3,12 @@ package is.hi.hbv501g2021supportsession.Controllers;
 import is.hi.hbv501g2021supportsession.Persistence.Entities.*;
 import is.hi.hbv501g2021supportsession.Services.WorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
@@ -19,7 +21,7 @@ public class Data {
     }
 
 
-@PostMapping("/data")
+@GetMapping("/data")
 public void workouts(){
     UserFitnessInfo userFitnessInfo1 = new UserFitnessInfo(2, WorkoutType.RUNNING, Difficulty.EASY);
     UserFitnessInfo userFitnessInfo2 = new UserFitnessInfo(2, WorkoutType.RUNNING, Difficulty.MEDIUM);
@@ -56,53 +58,54 @@ public void workouts(){
 
 
 
-    ArrayList<Exercise> easyRunList = new ArrayList<Exercise>(){
+    List<Exercise> easyRunList = new ArrayList<Exercise>(){
         {add(e1); add(e4); add(e7);}
     };
 
-    ArrayList<Exercise> mediumRunList = new ArrayList<Exercise>(){
+    List<Exercise> mediumRunList = new ArrayList<Exercise>(){
         {add(e2); add(e5); add(e7);}
     };
 
-    ArrayList<Exercise> hardRunList = new ArrayList<Exercise>(){
+    List<Exercise> hardRunList = new ArrayList<Exercise>(){
         {add(e3); add(e6); add(e7);}
     };
 
-    ArrayList<Exercise> easySwimList = new ArrayList<Exercise>(){
+    List<Exercise> easySwimList = new ArrayList<Exercise>(){
         {add(e1); add(e8); add(e7);}
     };
 
-    ArrayList<Exercise> mediumSwimList = new ArrayList<Exercise>(){
+    List<Exercise> mediumSwimList = new ArrayList<Exercise>(){
         {add(e2); add(e9); add(e7);}
     };
 
-    ArrayList<Exercise> hardSwimList = new ArrayList<Exercise>(){
+    List<Exercise> hardSwimList = new ArrayList<Exercise>(){
         {add(e3); add(e10); add(e7);}
     };
 
-    ArrayList<Exercise> easyWeightliftingList = new ArrayList<Exercise>(){
+    List<Exercise> easyWeightliftingList = new ArrayList<Exercise>(){
         {add(e1); add(e11); add(e14); add(e7);}
     };
 
-    ArrayList<Exercise> mediumWeightliftingList = new ArrayList<Exercise>(){
+    List<Exercise> mediumWeightliftingList = new ArrayList<Exercise>(){
         {add(e2); add(e12); add(e15); add(e7);}
     };
 
-    ArrayList<Exercise> hardWeightliftingList = new ArrayList<Exercise>(){
+    List<Exercise> hardWeightliftingList = new ArrayList<Exercise>(){
         {add(e3); add(e13); add(e16); add(e7);}
     };
 
-    Workout easyRun = new Workout("Easy run", userFitnessInfo1, false, easyRunList);
-    Workout mediumRun = new Workout("Easy run", userFitnessInfo2, false, mediumRunList);
-    Workout hardRun = new Workout("Easy run", userFitnessInfo3, false, hardRunList);
 
-    Workout easySwim = new Workout("Easy swim", userFitnessInfo4, false, easySwimList);
-    Workout mediumSwim = new Workout("Easy swim", userFitnessInfo5, false, mediumSwimList);
-    Workout hardSwim = new Workout("Easy swim", userFitnessInfo6, false, hardSwimList);
+    Workout easyRun = new Workout("Easy run", userFitnessInfo1, easyRunList);
+    Workout mediumRun = new Workout("Medium run", userFitnessInfo2, mediumRunList);
+    Workout hardRun = new Workout("Hard run", userFitnessInfo3, hardRunList);
 
-    Workout easyWeightlifting = new Workout("Easy weightlifting", userFitnessInfo7, false, easyWeightliftingList);
-    Workout mediumWeightlifting = new Workout("Easy weightlifting", userFitnessInfo8, false, mediumWeightliftingList);
-    Workout hardWeightlifting = new Workout("Easy weightlifting", userFitnessInfo9, false, hardWeightliftingList);
+    Workout easySwim = new Workout("Easy swim", userFitnessInfo4, easySwimList);
+    Workout mediumSwim = new Workout("Medium swim", userFitnessInfo5, mediumSwimList);
+    Workout hardSwim = new Workout("Hard swim", userFitnessInfo6, hardSwimList);
+
+    Workout easyWeightlifting = new Workout("Easy weightlifting", userFitnessInfo7, easyWeightliftingList);
+    Workout mediumWeightlifting = new Workout("Medium weightlifting", userFitnessInfo8, mediumWeightliftingList);
+    Workout hardWeightlifting = new Workout("Hard weightlifting", userFitnessInfo9, hardWeightliftingList);
 
     workoutService.save(easyRun);
     workoutService.save(mediumRun);
@@ -113,8 +116,6 @@ public void workouts(){
     workoutService.save(easyWeightlifting);
     workoutService.save(mediumWeightlifting);
     workoutService.save(hardWeightlifting);
-
-
 
 }
 }

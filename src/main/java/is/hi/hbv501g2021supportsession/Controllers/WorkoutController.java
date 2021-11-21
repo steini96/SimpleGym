@@ -10,6 +10,7 @@ import is.hi.hbv501g2021supportsession.Services.WorkoutService;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class WorkoutController {
