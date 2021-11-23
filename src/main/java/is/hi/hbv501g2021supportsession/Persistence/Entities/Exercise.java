@@ -17,6 +17,7 @@ public class Exercise {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(foreignKey = @ForeignKey(name = "exercise_ID"), name = "exercise_ID")
     private Workout workout;
 
     public Exercise(String ExerciseName, int repetitions, String duration) {

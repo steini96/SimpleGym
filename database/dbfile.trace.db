@@ -2253,3 +2253,9 @@ select workout0_.id as id1_4_, workout0_.workout_name as workout_2_4_, workout0_
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:829)
+2021-11-23 12:12:02 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERFITNESSINFO" not found; SQL statement:
+SELECT * FROM USERFITNESSINFO [42102-200]
+2021-11-23 13:14:59 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DELETE *[*] FROM WORKOUTS"; expected "identifier"; SQL statement:
+DELETE * FROM WORKOUTS [42001-200]
