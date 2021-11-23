@@ -56,15 +56,7 @@ public void workouts(){
     UserFitnessInfo userFitnessInfo8 = new UserFitnessInfo(2, WorkoutType.WEIGHTLIFING, Difficulty.MEDIUM);
     UserFitnessInfo userFitnessInfo9 = new UserFitnessInfo(2, WorkoutType.WEIGHTLIFING, Difficulty.HARD);
 
-    userService.saveUserFitnessInfo(userFitnessInfo1);
-    userService.saveUserFitnessInfo(userFitnessInfo2);
-    userService.saveUserFitnessInfo(userFitnessInfo3);
-    userService.saveUserFitnessInfo(userFitnessInfo4);
-    userService.saveUserFitnessInfo(userFitnessInfo5);
-    userService.saveUserFitnessInfo(userFitnessInfo6);
-    userService.saveUserFitnessInfo(userFitnessInfo7);
-    userService.saveUserFitnessInfo(userFitnessInfo8);
-    userService.saveUserFitnessInfo(userFitnessInfo9);
+
 
 
     User u1 = new User("user 1", "tfj1@hi.is",l1, userFitnessInfo1);
@@ -87,27 +79,11 @@ public void workouts(){
     User n8 = userService.hashPassword(u8);
     User n9 = userService.hashPassword(u9);
 
-    userService.saveLoginInfo(l1);
-    userService.saveLoginInfo(l2);
-    userService.saveLoginInfo(l3);
-    userService.saveLoginInfo(l4);
-    userService.saveLoginInfo(l5);
-    userService.saveLoginInfo(l6);
-    userService.saveLoginInfo(l7);
-    userService.saveLoginInfo(l8);
-    userService.saveLoginInfo(l9);
 
 
 
-    userService.saveUser(n1);
-    userService.saveUser(n2);
-    userService.saveUser(n3);
-    userService.saveUser(n4);
-    userService.saveUser(n5);
-    userService.saveUser(n6);
-    userService.saveUser(n7);
-    userService.saveUser(n8);
-    userService.saveUser(n9);
+
+
 
 
     Exercise e1 = new Exercise("Push ups", 5);
@@ -169,17 +145,34 @@ public void workouts(){
     };
 
 
-    Workout easyRun = new Workout("Easy run", userFitnessInfo1, easyRunList);
-    Workout mediumRun = new Workout("Medium run", userFitnessInfo2, mediumRunList);
-    Workout hardRun = new Workout("Hard run", userFitnessInfo3, hardRunList);
+    Workout easyRun = new Workout("Easy run", userFitnessInfo1, Difficulty.EASY, easyRunList, WorkoutType.RUNNING);
+    Workout mediumRun = new Workout("Medium run", userFitnessInfo2, Difficulty.MEDIUM,mediumRunList, WorkoutType.RUNNING);
+    Workout hardRun = new Workout("Hard run", userFitnessInfo3, Difficulty.HARD,hardRunList,WorkoutType.RUNNING);
 
-    Workout easySwim = new Workout("Easy swim", userFitnessInfo4, easySwimList);
-    Workout mediumSwim = new Workout("Medium swim", userFitnessInfo5, mediumSwimList);
-    Workout hardSwim = new Workout("Hard swim", userFitnessInfo6, hardSwimList);
+    Workout easySwim = new Workout("Easy swim", userFitnessInfo4, Difficulty.EASY,easySwimList, WorkoutType.SWIMMING);
+    Workout mediumSwim = new Workout("Medium swim", userFitnessInfo5, Difficulty.MEDIUM, mediumSwimList, WorkoutType.SWIMMING);
+    Workout hardSwim = new Workout("Hard swim", userFitnessInfo6, Difficulty.HARD,hardSwimList, WorkoutType.SWIMMING);
 
-    Workout easyWeightlifting = new Workout("Easy weightlifting", userFitnessInfo7, easyWeightliftingList);
-    Workout mediumWeightlifting = new Workout("Medium weightlifting", userFitnessInfo8, mediumWeightliftingList);
-    Workout hardWeightlifting = new Workout("Hard weightlifting", userFitnessInfo9, hardWeightliftingList);
+    Workout easyWeightlifting = new Workout("Easy weightlifting", userFitnessInfo7, Difficulty.EASY,easyWeightliftingList, WorkoutType.WEIGHTLIFING);
+    Workout mediumWeightlifting = new Workout("Medium weightlifting", userFitnessInfo8, Difficulty.MEDIUM,mediumWeightliftingList, WorkoutType.WEIGHTLIFING);
+    Workout hardWeightlifting = new Workout("Hard weightlifting", userFitnessInfo9, Difficulty.HARD,hardWeightliftingList, WorkoutType.WEIGHTLIFING);
+
+
+
+    /****************************************************
+     * ********* SAVING TO DATABASE *********************
+     * *************************************************/
+
+
+    userService.saveUserFitnessInfo(userFitnessInfo1);
+    userService.saveUserFitnessInfo(userFitnessInfo2);
+    userService.saveUserFitnessInfo(userFitnessInfo3);
+    userService.saveUserFitnessInfo(userFitnessInfo4);
+    userService.saveUserFitnessInfo(userFitnessInfo5);
+    userService.saveUserFitnessInfo(userFitnessInfo6);
+    userService.saveUserFitnessInfo(userFitnessInfo7);
+    userService.saveUserFitnessInfo(userFitnessInfo8);
+    userService.saveUserFitnessInfo(userFitnessInfo9);
 
     workoutService.save(easyRun);
     workoutService.save(mediumRun);
@@ -190,5 +183,27 @@ public void workouts(){
     workoutService.save(easyWeightlifting);
     workoutService.save(mediumWeightlifting);
     workoutService.save(hardWeightlifting);
+
+
+    userService.saveLoginInfo(l1);
+    userService.saveLoginInfo(l2);
+    userService.saveLoginInfo(l3);
+    userService.saveLoginInfo(l4);
+    userService.saveLoginInfo(l5);
+    userService.saveLoginInfo(l6);
+    userService.saveLoginInfo(l7);
+    userService.saveLoginInfo(l8);
+    userService.saveLoginInfo(l9);
+
+    userService.saveUser(n1);
+    userService.saveUser(n2);
+    userService.saveUser(n3);
+    userService.saveUser(n4);
+    userService.saveUser(n5);
+    userService.saveUser(n6);
+    userService.saveUser(n7);
+    userService.saveUser(n8);
+    userService.saveUser(n9);
+
 }
 }
