@@ -15,14 +15,11 @@ public class Workout {
     private  Difficulty difficulty;
     private  WorkoutType workoutType;
 
-
     @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Exercise> exercises = new ArrayList<>();
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     private UserFitnessInfo userFitnessInfo;
-
 
 
     public Workout(String workoutName , UserFitnessInfo userFitnessInfo, List<Exercise> exercises) {
@@ -53,7 +50,6 @@ public class Workout {
     }
 
     public void setUserFitnessInfo(UserFitnessInfo userFitnessInfo) {this.userFitnessInfo = userFitnessInfo;}
-
 
     }
 

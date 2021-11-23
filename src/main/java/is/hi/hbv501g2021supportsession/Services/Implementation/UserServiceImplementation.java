@@ -2,6 +2,7 @@ package is.hi.hbv501g2021supportsession.Services.Implementation;
 
 import is.hi.hbv501g2021supportsession.Persistence.Entities.LoginInfo;
 import is.hi.hbv501g2021supportsession.Persistence.Entities.User;
+import is.hi.hbv501g2021supportsession.Persistence.Entities.UserFitnessInfo;
 import is.hi.hbv501g2021supportsession.Persistence.Repositories.UserRepository;
 import is.hi.hbv501g2021supportsession.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,12 @@ public class UserServiceImplementation implements UserService {
     public LoginInfo saveLoginInfo(LoginInfo loginInfo) {
         return userRepository.save(loginInfo);
     }
+
+    @Override
+    public UserFitnessInfo saveUserFitnessInfo(UserFitnessInfo userFitnessInfo) {
+        return userRepository.save(userFitnessInfo);
+    }
+
 
     @Override
     public void deleteUser(User user) {

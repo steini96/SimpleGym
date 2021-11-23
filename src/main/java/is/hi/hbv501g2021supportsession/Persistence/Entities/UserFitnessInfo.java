@@ -17,7 +17,11 @@ public class UserFitnessInfo {
 
 
     @OneToMany(mappedBy = "userFitnessInfo", cascade = CascadeType.ALL, orphanRemoval = true)
-    private ArrayList<Workout> workouts = new ArrayList<>();
+    private List<Workout> workouts = new ArrayList<>();
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_ID"/*, nullable = true*/)
+    User user;
 
 
     public UserFitnessInfo() {
@@ -47,7 +51,6 @@ public class UserFitnessInfo {
         this.ID = ID;
     }
 
-    @Id
     public Long getId() {
         return ID;
     }
