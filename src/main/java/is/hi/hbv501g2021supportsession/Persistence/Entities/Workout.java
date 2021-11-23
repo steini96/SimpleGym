@@ -22,9 +22,8 @@ public class Workout {
     private UserFitnessInfo userFitnessInfo;
 
 
-    public Workout(String workoutName , UserFitnessInfo userFitnessInfo, List<Exercise> exercises) {
+    public Workout(String workoutName, List<Exercise> exercises) {
         WorkoutName = workoutName;
-        this.userFitnessInfo = userFitnessInfo;
         this.exercises = exercises;
     }
 

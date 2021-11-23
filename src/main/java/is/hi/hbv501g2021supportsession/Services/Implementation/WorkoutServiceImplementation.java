@@ -1,5 +1,6 @@
 package is.hi.hbv501g2021supportsession.Services.Implementation;
 
+import is.hi.hbv501g2021supportsession.Persistence.Entities.Exercise;
 import is.hi.hbv501g2021supportsession.Persistence.Entities.Workout;
 import is.hi.hbv501g2021supportsession.Persistence.Repositories.WorkoutRepository;
 import is.hi.hbv501g2021supportsession.Services.WorkoutService;
@@ -22,6 +23,11 @@ public class WorkoutServiceImplementation implements WorkoutService {
     @Override
     public Workout save(Workout workout){
         return workoutRepository.save(workout);
+    } //held að þetta noti innbyggt save fall í JPA repository
+
+    @Override
+    public Exercise save(Exercise exercise){
+        return workoutRepository.save(exercise);
     } //held að þetta noti innbyggt save fall í JPA repository
 
 

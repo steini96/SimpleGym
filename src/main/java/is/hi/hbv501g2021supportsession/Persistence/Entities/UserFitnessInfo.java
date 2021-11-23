@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name = "userFitnessInfo")
 public class UserFitnessInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long ID;
 
     private int numWeeklyWrkOut;
@@ -27,10 +27,11 @@ public class UserFitnessInfo {
     public UserFitnessInfo() {
     }
 
-    public UserFitnessInfo(int numWeeklyWrkOut, WorkoutType workoutType, Difficulty difficulty) {
+    public UserFitnessInfo(int numWeeklyWrkOut, WorkoutType workoutType, Difficulty difficulty, List<Workout> workouts) {
         this.numWeeklyWrkOut = numWeeklyWrkOut;
         this.workoutType = workoutType;
         this.difficulty = difficulty;
+        this.workouts = workouts;
     }
     public UserFitnessInfo(int numWeeklyWrkOut) {
         this.numWeeklyWrkOut = numWeeklyWrkOut;
