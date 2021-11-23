@@ -28,25 +28,6 @@ public class Data {
         this.userService = userService;
     }
 
-    private User hashPassword(User user) {
-        SecureRandom random = new SecureRandom();
-        byte[] salt = new byte[16];
-        random.nextBytes(salt);
-        KeySpec spec = new PBEKeySpec(user.getLoginInfo().getPassword().toCharArray(), salt, 65536, 128);
-        try {
-            SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-            byte[] hash = factory.generateSecret(spec).getEncoded();
-            String hashBase64encoded = Base64.getEncoder().encodeToString(hash);
-            user.getLoginInfo().setPassword(hashBase64encoded);
-            user.getLoginInfo().setSalt(salt);
-            return user;
-
-        } catch (Exception e) {
-            System.out.println("Error in hashing");
-            return null;
-        }
-    }
-
 
 @GetMapping("/data")
 public void workouts(){
@@ -96,15 +77,15 @@ public void workouts(){
     User u8 = new User("user 8", "tfj8@hi.is",l8, userFitnessInfo8);
     User u9 = new User("user 9", "tfj9@hi.is",l9, userFitnessInfo9);
 
-    User n1 = hashPassword(u1);
-    User n2 = hashPassword(u2);
-    User n3 = hashPassword(u3);
-    User n4 = hashPassword(u4);
-    User n5 = hashPassword(u5);
-    User n6 = hashPassword(u6);
-    User n7 = hashPassword(u7);
-    User n8 = hashPassword(u8);
-    User n9 = hashPassword(u9);
+    User n1 = userService.hashPassword(u1);
+    User n2 = userService.hashPassword(u2);
+    User n3 = userService.hashPassword(u3);
+    User n4 = userService.hashPassword(u4);
+    User n5 = userService.hashPassword(u5);
+    User n6 = userService.hashPassword(u6);
+    User n7 = userService.hashPassword(u7);
+    User n8 = userService.hashPassword(u8);
+    User n9 = userService.hashPassword(u9);
 
     userService.saveLoginInfo(l1);
     userService.saveLoginInfo(l2);
