@@ -20,6 +20,30 @@
         <h3>Password</h3>
         <input type="password" id="password" th:field="*{password}" required>
     </div>
+    <div th:object="${newUser.userFitnessInfo}">
+        <div>
+            <h3>Number of weekly workouts</h3>
+            <input type="number" name="nww" id="nww" th:field="*{numWeeklyWrkOut}">
+        </div>
+        <div>
+            <h3>Difficulty</h3>
+            <input type="radio" name="Difficulty" id="Difficulty1" value = EASY th:field="*{difficulty}">
+            <label for="Difficulty1">Easy</label><br>
+            <input type="radio" name="Difficulty" id="Difficulty2" value = MEDIUM th:field="*{difficulty}">
+            <label for="Difficulty2">Medium</label><br>
+            <input type="radio" name="Difficulty" id="Difficulty3" value = HARD th:field="*{difficulty}">
+            <label for="Difficulty3">Hard</label><br>
+        </div>
+        <div>
+            <h3>Workout Type</h3>
+            <input type="radio" name="WorkoutType" id="WorkoutType1" value = RUNNING th:field="*{workoutType}">
+            <label for="WorkoutType1"> Running</label><br>
+            <input type="radio" name="WorkoutType" id="WorkoutType2" value = SWIMMING th:field="*{workoutType}">
+            <label for="WorkoutType2"> Swimming</label><br>
+            <input type="radio" name="WorkoutType" id="WorkoutType3" value = WEIGHTLIFTING th:field="*{workoutType}">
+            <label for="WorkoutType3"> Weightlifting</label><br>
+        </div>
+    </div>
     <input type="submit" value="Signup"/>
 </form>
 </body>
