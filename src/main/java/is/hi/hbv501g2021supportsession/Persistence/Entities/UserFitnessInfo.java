@@ -27,11 +27,10 @@ public class UserFitnessInfo {
     public UserFitnessInfo() {
     }
 
-    public UserFitnessInfo(int numWeeklyWrkOut, WorkoutType workoutType, Difficulty difficulty, List<Workout> workouts) {
+    public UserFitnessInfo(int numWeeklyWrkOut, WorkoutType workoutType, Difficulty difficulty) {
         this.numWeeklyWrkOut = numWeeklyWrkOut;
         this.workoutType = workoutType;
         this.difficulty = difficulty;
-        this.workouts = workouts;
     }
     public UserFitnessInfo(int numWeeklyWrkOut) {
         this.numWeeklyWrkOut = numWeeklyWrkOut;
