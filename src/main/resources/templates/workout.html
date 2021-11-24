@@ -1,0 +1,12 @@
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Workout</title>
+</head>
+<body>
+<h1>Workout</h1>
+
+<p th:text="${workoutType}" th:unless="${session == null}">[...]</p>
+
+</body>
+</html>
