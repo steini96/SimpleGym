@@ -8,7 +8,8 @@ import java.util.List;
 @Table(name = "userFitnessInfo")
 public class UserFitnessInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private long ID;
 
     private int numWeeklyWrkOut;
@@ -19,9 +20,8 @@ public class UserFitnessInfo {
     @OneToMany(mappedBy = "userFitnessInfo", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Workout> workouts = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_ID"/*, nullable = true*/)
-    User user;
+    @OneToOne(mappedBy = "userFitnessInfo")
+    private User user;
 
 
     public UserFitnessInfo() {
@@ -66,5 +66,18 @@ public class UserFitnessInfo {
 
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
+    }
+
+
+    public List<Workout> getWorkouts() {
+        return workouts;
+    }
+
+    public void setWorkouts(List<Workout> workouts) {
+        this.workouts = workouts;
+    }
+
+    public void addWorkout(Workout workout) {
+        this.workouts.add(workout);
     }
 }
