@@ -1,6 +1,5 @@
 package is.hi.hbv501g2021supportsession.Controllers;
 
-import is.hi.hbv501g2021supportsession.Persistence.Entities.LoginInfo;
 import is.hi.hbv501g2021supportsession.Persistence.Entities.User;
 import is.hi.hbv501g2021supportsession.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +9,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
+
 import javax.servlet.http.HttpSession;
-import java.security.SecureRandom;
-import java.security.spec.KeySpec;
-import java.util.Base64;
+
 
 @Controller
 public class UserController {
@@ -45,19 +41,21 @@ public class UserController {
         String errorMsg = "";
         User existingUser = userService.findUserByName(user.getName());
         if (existingUser != null) {
-            String passwords = comparePasswords(existingUser, user);
-
-            if (passwords.equals("match")) {
-                session.setAttribute("LoggedInUser", existingUser);
-                model.addAttribute("LoggedInUser", existingUser);
-                return "loggedInPage";
-            }
-            if (passwords.equals("noMatch")) {
-                errorMsg = "Username and password don't match";
-            }
+            String passwords = userService.comparePasswords(existingUser, user);
             if (passwords == null) {
                 errorMsg = "Error: try again";
             }
+            else {
+                if (passwords.equals("match")) {
+                    session.setAttribute("LoggedInUser", existingUser);
+                    model.addAttribute("LoggedInUser", existingUser);
+                    return "redirect:/";
+                }
+                if (passwords.equals("noMatch")) {
+                    errorMsg = "Username and password don't match";
+                }
+            }
+
         } else {
             errorMsg = "Username does not exist";
         }
@@ -68,8 +66,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logOutUser(User user, HttpSession session) {
-        User loggedOutUser = userService.logoutUser(user);
+    public String logOutUser(HttpSession session) {
         session.removeAttribute("LoggedInUser");
         return "redirect:/login";
     }
@@ -95,7 +92,7 @@ public class UserController {
             return signUpPage(model);
         }
 
-        User newUser = hashPassword(user);
+        User newUser = userService.hashPassword(user);
         if(newUser == null) {
             model.addAttribute("signupError", "Error: Try again");
             return signUpPage(model);
@@ -116,52 +113,5 @@ public class UserController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/overview", method = RequestMethod.GET)
-    public String overViewGet(Model model) {
-        // todo: Get user from session
-        return "";
-    }
-    public String comparisonGet(){
-        return "";
-    }
-
-    private User hashPassword(User user) {
-        SecureRandom random = new SecureRandom();
-        byte[] salt = new byte[16];
-        random.nextBytes(salt);
-        KeySpec spec = new PBEKeySpec(user.getLoginInfo().getPassword().toCharArray(), salt, 65536, 128);
-        try {
-            SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-            byte[] hash = factory.generateSecret(spec).getEncoded();
-            String hashBase64encoded = Base64.getEncoder().encodeToString(hash);
-            user.getLoginInfo().setPassword(hashBase64encoded);
-            user.getLoginInfo().setSalt(salt);
-            return user;
-
-        } catch (Exception e) {
-            System.out.println("Error in hashing");
-            return null;
-        }
-    }
-
-    private String comparePasswords(User existingUser, User user) {
-        LoginInfo existingUserInfo = existingUser.getLoginInfo();
-        String existingPassHash = existingUserInfo.getPassword();
-        byte[] salt = existingUserInfo.getSalt();
-
-        try {
-            KeySpec newSpec = new PBEKeySpec(user.getLoginInfo().getPassword().toCharArray(), salt, 65536, 128);
-            SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-            byte[] hash = factory.generateSecret(newSpec).getEncoded();
-            String newHash = Base64.getEncoder().encodeToString(hash);
-
-            if(existingPassHash.equals(newHash)) {
-                return "match";
-            }
-            return "noMatch";
-        } catch (Exception e) {
-            return null;
-        }
-    }
 
 }

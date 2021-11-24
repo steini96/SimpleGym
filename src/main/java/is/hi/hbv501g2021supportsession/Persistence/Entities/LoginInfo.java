@@ -18,6 +18,10 @@ public class LoginInfo {
             this.salt = salt;
         }
 
+    public LoginInfo(String password){
+        this.password = password;
+    }
+
     public LoginInfo() {
         }
 

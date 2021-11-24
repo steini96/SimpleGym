@@ -8,27 +8,29 @@ import java.util.List;
 @Table(name = "workouts")
 public class Workout {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long ID; //Guid?
 
     private String WorkoutName; //Munum við þurfa þetta?
+
     private  Difficulty difficulty;
     private  WorkoutType workoutType;
 
-
-    @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "workout_id")
     private List<Exercise> exercises = new ArrayList<>();
 
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
+    @JoinColumn(name="userFitnessInfo_id", nullable=false)
     private UserFitnessInfo userFitnessInfo;
 
 
-
-    public Workout(String workoutName , UserFitnessInfo userFitnessInfo, List<Exercise> exercises) {
+    public Workout(String workoutName , UserFitnessInfo userFitnessInfo,Difficulty difficulty, List<Exercise> exercises, WorkoutType workoutType) {
         WorkoutName = workoutName;
+        this.difficulty = difficulty;
         this.userFitnessInfo = userFitnessInfo;
         this.exercises = exercises;
+        this.workoutType = workoutType;
     }
 
     public Workout() {
@@ -54,6 +56,22 @@ public class Workout {
 
     public void setUserFitnessInfo(UserFitnessInfo userFitnessInfo) {this.userFitnessInfo = userFitnessInfo;}
 
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public WorkoutType getWorkoutType() {
+        return workoutType;
+    }
+
+    public void setWorkoutType(WorkoutType workoutType) {
+        this.workoutType = workoutType;
+    }
 
     }
+
 

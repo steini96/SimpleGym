@@ -17,7 +17,8 @@ public class User {
     @OneToOne(fetch = FetchType.LAZY)
     LoginInfo loginInfo;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="userFitnessInfo_id", referencedColumnName = "ID")
     UserFitnessInfo userFitnessInfo;
 
     public User() {

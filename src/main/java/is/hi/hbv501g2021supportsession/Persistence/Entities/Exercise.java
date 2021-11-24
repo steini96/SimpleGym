@@ -16,13 +16,15 @@ public class Exercise {
     public Exercise() {
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name="workout_id", insertable = false,updatable = false)
     private Workout workout;
 
-    public Exercise(String ExerciseName, int repetitions, String duration) {
+    public Exercise(String ExerciseName, int repetitions, String duration, Workout workout) {
         exerciseName = ExerciseName;
         this.repetitions = repetitions;
         this.duration = duration;
+        this.workout = workout;
     }
 
     public Exercise(String ExerciseName, int repetitions) {
