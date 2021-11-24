@@ -8,5 +8,21 @@
 
 <p th:text="${workoutType}" th:unless="${session == null}">[...]</p>
 
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="exercise : ${exerciseList}">
+        <td th:text="${exercise.exerciseName}"></td>
+        <td th:text="${exercise.repetitions}"></td>
+        <td th:text="${exercise.duration}"></td>
+    </tr>
+    </tbody>
+</table>
+
 </body>
 </html>

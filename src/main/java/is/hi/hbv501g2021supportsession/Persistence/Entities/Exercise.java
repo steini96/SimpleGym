@@ -27,6 +27,12 @@ public class Exercise {
         this.workout = workout;
     }
 
+    public Exercise(String ExerciseName, String duration, int repetitions) {
+        exerciseName = ExerciseName;
+        this.repetitions = repetitions;
+        this.duration = duration;
+    }
+
     public Exercise(String ExerciseName, int repetitions) {
         exerciseName = ExerciseName;
         this.repetitions = repetitions;
@@ -58,4 +64,8 @@ public class Exercise {
     }
 
     public void setWorkout(Workout workout){this.workout = workout;}
+
+    public String getDuration(){return this.duration;}
+
+    public int getRepetitions(){return this.repetitions;}
 }
