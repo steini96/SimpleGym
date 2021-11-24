@@ -2253,9 +2253,30 @@ select workout0_.id as id1_4_, workout0_.workout_name as workout_2_4_, workout0_
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:829)
+<<<<<<< HEAD
+2021-11-21 20:30:13 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "LOGIN_INFO[*]"; SQL statement:
+LOGIN_INFO [42000-200]
+2021-11-21 21:27:46 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM USER_FITNESS_INFO
+SELECT[*] * FROM WORKOUTS"; SQL statement:
+SELECT * FROM USER_FITNESS_INFO
+select * from WORKOUTS [42000-200]
+=======
 2021-11-23 12:12:02 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERFITNESSINFO" not found; SQL statement:
 SELECT * FROM USERFITNESSINFO [42102-200]
 2021-11-23 13:14:59 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DELETE *[*] FROM WORKOUTS"; expected "identifier"; SQL statement:
 DELETE * FROM WORKOUTS [42001-200]
+>>>>>>> main
+2021-11-24 22:55:47 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM EXERCISES
+SELECT[*] * FROM WORKOUTS"; SQL statement:
+SELECT * FROM exercises
+select * from workouts [42000-200]
+2021-11-24 23:05:45 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM EXERCISES 
+SELECT[*] * FROM WORKOUTS"; SQL statement:
+SELECT * FROM EXERCISES 
+SELECT * FROM WORKOUTS [42000-200]

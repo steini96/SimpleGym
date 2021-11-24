@@ -42,6 +42,26 @@ public class WorkoutServiceImplementation implements WorkoutService {
         return workoutRepository.findAll();
     }
 
+    //@Override
+    //public List<Workout> findAllWorkout(){
+    //    return workoutRepository.findAll();
+    //}
+
+    /*@Override
+    public List<Exercise> findAll(String strengur){
+        return workoutRepository.findAll(strengur);
+    }*/
+
+    /*@Override
+    public List<Workout> findAllByfinAllByUSER_FITNESS_INFO_ID(long USER_FITNESS_INFO_ID){
+        return workoutRepository.findAllByfinAllByUSER_FITNESS_INFO_ID(USER_FITNESS_INFO_ID);
+    }
+
+    @Override
+    public List<Exercise> findAllByWORKOUT_ID(long WORKOUT_ID){
+        return workoutRepository.findAllByWORKOUT_ID(WORKOUT_ID);
+    }*/
+
     @Override
     public Workout findByID(long id){
         return workoutRepository.findByID(id);

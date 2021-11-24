@@ -52,9 +52,9 @@ public void workouts(){
     UserFitnessInfo userFitnessInfo4 = new UserFitnessInfo(2, WorkoutType.SWIMMING, Difficulty.EASY);
     UserFitnessInfo userFitnessInfo5 = new UserFitnessInfo(2, WorkoutType.SWIMMING, Difficulty.MEDIUM);
     UserFitnessInfo userFitnessInfo6 = new UserFitnessInfo(2, WorkoutType.SWIMMING, Difficulty.HARD);
-    UserFitnessInfo userFitnessInfo7 = new UserFitnessInfo(2, WorkoutType.WEIGHTLIFING, Difficulty.EASY);
-    UserFitnessInfo userFitnessInfo8 = new UserFitnessInfo(2, WorkoutType.WEIGHTLIFING, Difficulty.MEDIUM);
-    UserFitnessInfo userFitnessInfo9 = new UserFitnessInfo(2, WorkoutType.WEIGHTLIFING, Difficulty.HARD);
+    UserFitnessInfo userFitnessInfo7 = new UserFitnessInfo(2, WorkoutType.WEIGHTLIFTING, Difficulty.EASY);
+    UserFitnessInfo userFitnessInfo8 = new UserFitnessInfo(2, WorkoutType.WEIGHTLIFTING, Difficulty.MEDIUM);
+    UserFitnessInfo userFitnessInfo9 = new UserFitnessInfo(2, WorkoutType.WEIGHTLIFTING, Difficulty.HARD);
 
 
 
@@ -86,27 +86,27 @@ public void workouts(){
 
 
 
-    Exercise e1 = new Exercise("Push ups", 5);
-    Exercise e2 = new Exercise("Push ups", 10);
-    Exercise e3 = new Exercise("Push ups", 20);
+    Exercise e1 = new Exercise("Push ups", "", 5);
+    Exercise e2 = new Exercise("Push ups", "", 10);
+    Exercise e3 = new Exercise("Push ups", "", 20);
 
-    Exercise e4 = new Exercise("Jog", "1 km");
-    Exercise e5 = new Exercise("Jog", "5 km");
-    Exercise e6 = new Exercise("Jog", "10 km");
+    Exercise e4 = new Exercise("Jog", "1 km", 0);
+    Exercise e5 = new Exercise("Jog", "5 km", 0);
+    Exercise e6 = new Exercise("Jog", "10 km", 0);
 
-    Exercise e7 = new Exercise("Stretches", "15 minutes");
+    Exercise e7 = new Exercise("Stretches", "15 minutes", 0);
 
-    Exercise e8 = new Exercise("Swim", "500 m");
-    Exercise e9 = new Exercise("Swim", "1 km");
-    Exercise e10 = new Exercise("Swim", "5 km");
+    Exercise e8 = new Exercise("Swim", "500 m", 0);
+    Exercise e9 = new Exercise("Swim", "1 km", 0);
+    Exercise e10 = new Exercise("Swim", "5 km", 0);
 
-    Exercise e11 = new Exercise("Benchpress", "3x3");
-    Exercise e12 = new Exercise("Benchpress", "4*4");
-    Exercise e13 = new Exercise("Benchpress", "5*5");
+    Exercise e11 = new Exercise("Benchpress", "3x3", 0);
+    Exercise e12 = new Exercise("Benchpress", "4*4", 0);
+    Exercise e13 = new Exercise("Benchpress", "5*5", 0);
 
-    Exercise e14 = new Exercise("Squat", "3x3");
-    Exercise e15 = new Exercise("Squat", "4*4");
-    Exercise e16 = new Exercise("Squat", "5*5");
+    Exercise e14 = new Exercise("Squat", "3x3", 0);
+    Exercise e15 = new Exercise("Squat", "4*4", 0);
+    Exercise e16 = new Exercise("Squat", "5*5", 0);
 
     List<Exercise> easyRunList = new ArrayList<Exercise>(){
         {add(e1); add(e4); add(e7);}
@@ -153,9 +153,9 @@ public void workouts(){
     Workout mediumSwim = new Workout("Medium swim", userFitnessInfo5, Difficulty.MEDIUM, mediumSwimList, WorkoutType.SWIMMING);
     Workout hardSwim = new Workout("Hard swim", userFitnessInfo6, Difficulty.HARD,hardSwimList, WorkoutType.SWIMMING);
 
-    Workout easyWeightlifting = new Workout("Easy weightlifting", userFitnessInfo7, Difficulty.EASY,easyWeightliftingList, WorkoutType.WEIGHTLIFING);
-    Workout mediumWeightlifting = new Workout("Medium weightlifting", userFitnessInfo8, Difficulty.MEDIUM,mediumWeightliftingList, WorkoutType.WEIGHTLIFING);
-    Workout hardWeightlifting = new Workout("Hard weightlifting", userFitnessInfo9, Difficulty.HARD,hardWeightliftingList, WorkoutType.WEIGHTLIFING);
+    Workout easyWeightlifting = new Workout("Easy weightlifting", userFitnessInfo7, Difficulty.EASY,easyWeightliftingList, WorkoutType.WEIGHTLIFTING);
+    Workout mediumWeightlifting = new Workout("Medium weightlifting", userFitnessInfo8, Difficulty.MEDIUM,mediumWeightliftingList, WorkoutType.WEIGHTLIFTING);
+    Workout hardWeightlifting = new Workout("Hard weightlifting", userFitnessInfo9, Difficulty.HARD,hardWeightliftingList, WorkoutType.WEIGHTLIFTING);
 
 
 
