@@ -9,7 +9,7 @@
 <div th:switch="${workouts}">
     <h2 th:case="null">No Workouts yet!</h2>
     <div th:case="*">
-        <h2>Workouts</h2>
+        <h2>Welcome, we provide the following workouts:</h2>
         <table>
             <thead>
             <tr>
@@ -26,6 +26,7 @@
         </table>
     </div>
     <p><a href="/addWorkout">Add a new workout</a></p>
+    <p><a href="/logout">Logout</a></p>
 </div>
 
 </body>
