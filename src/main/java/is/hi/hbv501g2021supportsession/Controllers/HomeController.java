@@ -22,7 +22,7 @@ public class HomeController {
         this.workoutService = workoutService;
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/home")
     public String homePage(Model model){
         //Call a method in a Service Class
         List<Workout> allWorkouts = workoutService.findAll();
@@ -31,6 +31,10 @@ public class HomeController {
         return "home";
     }
 
+    @RequestMapping("/")
+    public String firstSite(Model model){
+        return "FirstSite";
+    }
 
     @RequestMapping(value = "/addWorkout", method = RequestMethod.GET)
     public String addBookForm(Workout workout){

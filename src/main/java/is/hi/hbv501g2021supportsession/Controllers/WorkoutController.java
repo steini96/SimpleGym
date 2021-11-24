@@ -36,6 +36,7 @@ public class WorkoutController {
     public String getUserFitnessInfo(HttpSession session, Model model) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         if (sessionUser == null){
+            System.out.println("loggin");
             return "home";
         }
         else if(sessionUser.getUserFitnessInfo() == null){
@@ -49,10 +50,7 @@ public class WorkoutController {
     public String addUserFitnessInfo(UserFitnessInfo userFitnessInfo,  BindingResult result, Model model, HttpSession session){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         sessionUser.setUserFitnessInfo(userFitnessInfo);
-        System.out.println(sessionUser.getUserFitnessInfo().getNumWeeklyWrkOut());
-        System.out.println(sessionUser.getUserFitnessInfo().getDifficulty());
-        System.out.println(sessionUser.getUserFitnessInfo().getWorkoutType());
-        return "redirect:/";
+        return "redirect:/home";
     }
 
     @RequestMapping(value = "/work2", method = RequestMethod.GET)

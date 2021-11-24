@@ -54,7 +54,7 @@ public class UserController {
                 if (passwords.equals("match")) {
                     session.setAttribute("LoggedInUser", existingUser);
                     model.addAttribute("LoggedInUser", existingUser);
-                    return "redirect:/";
+                    return "redirect:/home";
                 }
                 if (passwords.equals("noMatch")) {
                     errorMsg = "Username and password don't match";
@@ -73,7 +73,7 @@ public class UserController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logOutUser(HttpSession session) {
         session.removeAttribute("LoggedInUser");
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
@@ -114,6 +114,7 @@ public class UserController {
             return signUpPage(model);
         }
 
+        userService.saveUserFitnessInfo(newUser.getUserFitnessInfo());
         userService.saveLoginInfo(newUser.getLoginInfo());
         userService.saveUser(newUser);
         return "redirect:/login";
