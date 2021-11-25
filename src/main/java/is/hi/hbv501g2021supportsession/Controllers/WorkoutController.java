@@ -35,18 +35,17 @@ public class WorkoutController {
          return sessionUser;
     }
 
-    @RequestMapping(value = "/getUserFitnessInfo", method = RequestMethod.GET)
+    @RequestMapping(value = "/updateUserFitnessInfo", method = RequestMethod.GET)
     public String getUserFitnessInfo(HttpSession session, Model model) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         if (sessionUser == null){
             System.out.println("loggin");
             return "home";
         }
-        else if(sessionUser.getUserFitnessInfo() == null){
-            model.addAttribute("userFitnessInfo", new UserFitnessInfo());
-            return "getUserFitnessInfo";
-        }
-        return "home";
+
+        model.addAttribute("userFitnessInfo", new UserFitnessInfo());
+        return "getUserFitnessInfo";
+
     }
 
     @RequestMapping(value = "/addUserFitnessInfo", method = RequestMethod.POST)

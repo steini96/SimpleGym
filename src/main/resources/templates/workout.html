@@ -1,6 +1,7 @@
 <html xmlns:th="https://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link th:href="@{main.css}" rel="stylesheet" />
     <title>Workout</title>
 </head>
 <body>
@@ -11,8 +12,9 @@
 <table>
     <thead>
     <tr>
-        <th>Title</th>
-        <th>Delete</th>
+        <th>Exercise</th>
+        <th>Repetitions</th>
+        <th>Duration</th>
     </tr>
     </thead>
     <tbody>
@@ -23,6 +25,8 @@
     </tr>
     </tbody>
 </table>
+
+<h3><a href="/home">Go to Home</a></h3>
 
 </body>
 </html>

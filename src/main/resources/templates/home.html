@@ -18,22 +18,16 @@
     <div th:case="*">
         <h2>Welcome, we provide the following workouts:</h2>
         <table>
-            <thead>
-            <tr>
-                <th>Title</th>
-                <th>Delete</th>
-            </tr>
-            </thead>
             <tbody>
             <tr th:each="workout : ${workouts}">
                 <td th:text="${workout.workoutName}"></td>
-                <td><a th:href="@{/delete/{id}(id=${workout.ID})}">Delete</a></td>
             </tr>
             </tbody>
         </table>
     </div>
-    <h3><a href="/addWorkout">Add a new workout</a></h3>
     <h3><a href="/logout">Logout</a></h3>
+    <h3><a href="/updateUserFitnessInfo">Update Fitness Info</a></h3>
+    <h3><a href="/getWorkout">Go to Workout</a></h3>
 </div>
 
 </body>
