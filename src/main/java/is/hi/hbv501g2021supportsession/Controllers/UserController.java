@@ -1,22 +1,27 @@
 package is.hi.hbv501g2021supportsession.Controllers;
 
+import is.hi.hbv501g2021supportsession.Persistence.Entities.LoginInfo;
 import is.hi.hbv501g2021supportsession.Persistence.Entities.User;
+import is.hi.hbv501g2021supportsession.Persistence.Entities.UserFitnessInfo;
 import is.hi.hbv501g2021supportsession.Persistence.Entities.Workout;
 import is.hi.hbv501g2021supportsession.Services.UserService;
 import is.hi.hbv501g2021supportsession.Services.WorkoutService;
+import org.hibernate.annotations.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.http.HttpSession;
+import java.net.URISyntaxException;
 import java.util.List;
 
 
-@Controller
+@RestController
+@RequestMapping("user")
 public class UserController {
 
     UserService userService;
@@ -28,47 +33,48 @@ public class UserController {
         this.workoutService = workoutService;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage(Model model, HttpSession session){
-        // Returns login page
-        if(session.getAttribute("loggedInUser") != null) {
-            return "loggedInPage";
-        }
-        model.addAttribute("user",new User());
-        return "login";
+    /***
+     *
+     *  TESTING TESTING
+     * */
+    @GetMapping("/foo")
+    public @ResponseBody User foo(){
+        LoginInfo loginInfo = new LoginInfo("PassiðHansMagga");
+        UserFitnessInfo userFitnessInfo = new UserFitnessInfo();
+
+        User usr = new User("Magnús Þór", "Maggi@mix.ru", loginInfo, userFitnessInfo);
+        return usr;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginUser(User user, BindingResult result, Model model, HttpSession session){
-        if(result.hasErrors()) {
-            return "login";
-        }
-        String errorMsg = "";
-        User existingUser = userService.findUserByName(user.getName());
-        if (existingUser != null) {
-            String passwords = userService.comparePasswords(existingUser, user);
-            if (passwords == null) {
-                errorMsg = "Error: try again";
-            }
-            else {
-                if (passwords.equals("match")) {
-                    session.setAttribute("LoggedInUser", existingUser);
-                    model.addAttribute("LoggedInUser", existingUser);
-                    return "redirect:/home";
-                }
-                if (passwords.equals("noMatch")) {
-                    errorMsg = "Username and password don't match";
-                }
-            }
+//    @PostMapping("/login")
+//    User @ResponseBody loginUser(@RequestBody User user) {
+//        System.out.println(user.getName());
+//        String errorMsg = "";
+//        User existingUser = userService.findUserByName(user.getName());
+//        if (existingUser != null) {
+//            String passwords = userService.comparePasswords(existingUser, user);
+//            if (passwords == null) {
+////                return {"error":"Ers"};
+//                return ResponseEntity<>.notFound().build();
+//            }
+//            else {
+//                if (passwords.equals("match")) {
+//                    session.setAttribute("LoggedInUser", existingUser);
+//                    model.addAttribute("LoggedInUser", existingUser);
+//                }
+//                if (passwords.equals("noMatch")) {
+//                    errorMsg = "Username and password don't match";
+//                }
+//            }
+//
+//        } else {
+//            errorMsg = "Username does not exist";
+//        }
+//
+//    }
 
-        } else {
-            errorMsg = "Username does not exist";
-        }
 
-        /// When password does not match
-        model.addAttribute("loginError", errorMsg);
-        return loginPage(model,session);
-    }
+
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logOutUser(HttpSession session) {
