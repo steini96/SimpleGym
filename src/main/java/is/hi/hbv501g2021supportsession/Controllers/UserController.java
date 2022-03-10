@@ -8,6 +8,8 @@ import is.hi.hbv501g2021supportsession.Services.UserService;
 import is.hi.hbv501g2021supportsession.Services.WorkoutService;
 import org.hibernate.annotations.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,12 +35,13 @@ public class UserController {
         this.workoutService = workoutService;
     }
 
+
     /***
      *
      *  TESTING TESTING
      * */
     @GetMapping("/foo")
-    public @ResponseBody User foo(){
+    public User foo(){
         LoginInfo loginInfo = new LoginInfo("PassiðHansMagga");
         UserFitnessInfo userFitnessInfo = new UserFitnessInfo();
 
@@ -46,8 +49,9 @@ public class UserController {
         return usr;
     }
 
+//
 //    @PostMapping("/login")
-//    User @ResponseBody loginUser(@RequestBody User user) {
+//    User @ResponseBody loginUser( @ResponseBody User user) {
 //        System.out.println(user.getName());
 //        String errorMsg = "";
 //        User existingUser = userService.findUserByName(user.getName());
@@ -55,7 +59,8 @@ public class UserController {
 //            String passwords = userService.comparePasswords(existingUser, user);
 //            if (passwords == null) {
 ////                return {"error":"Ers"};
-//                return ResponseEntity<>.notFound().build();
+//                JSONObject();
+//                return ResponseEntity.notFound().build();
 //            }
 //            else {
 //                if (passwords.equals("match")) {
@@ -75,28 +80,14 @@ public class UserController {
 
 
 
+    @PostMapping(path= "/signup",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> signUpUser(@RequestBody User user) {
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logOutUser(HttpSession session) {
-        session.removeAttribute("LoggedInUser");
-        return "redirect:/";
-    }
-
-    @RequestMapping(value = "/signup", method = RequestMethod.GET)
-    public String signUpPage(Model model) {
-        model.addAttribute("newUser",new User());
-        return "signup";
-    }
-
-    @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public String signUpUser(User user, BindingResult result, Model model) {
-        if(result.hasErrors()) {
-            return "redirect:/signup";
-        }
         System.out.println("Username: " + user.getName());
         System.out.println("Password: " + user.getLoginInfo().getPassword());
         System.out.println("Difficulty: " + user.getUserFitnessInfo().getDifficulty().toString());
-
 
         if(user.getUserFitnessInfo() != null) {
             List<Workout> allWorkouts = workoutService.findAll();
@@ -108,22 +99,22 @@ public class UserController {
         System.out.println("Workout 1: " + user.getUserFitnessInfo().getWorkouts().get(1).getWorkoutName());
 
         User exists = userService.findUserByName(user.getName());
-        // Catch error of username already exists
         if(exists != null) {
-            model.addAttribute("signupError", "Error: Username taken");
-            return signUpPage(model);
+            // Username exists
+            return null;
         }
 
         User newUser = userService.hashPassword(user);
+
         if(newUser == null) {
-            model.addAttribute("signupError", "Error: Try again");
-            return signUpPage(model);
+            // Signup Error
+            return null;
         }
 
         userService.saveUserFitnessInfo(newUser.getUserFitnessInfo());
         userService.saveLoginInfo(newUser.getLoginInfo());
         userService.saveUser(newUser);
-        return "redirect:/login";
+        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/loggedin", method = RequestMethod.GET)

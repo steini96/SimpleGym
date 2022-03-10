@@ -38,11 +38,11 @@
 //        return "login";
 //    }
 //
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginUser(User user, BindingResult result, Model model, HttpSession session){
-        if(result.hasErrors()) {
-            return "login";
-        }
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
+//    public String loginUser(User user, BindingResult result, Model model, HttpSession session){
+//        if(result.hasErrors()) {
+//            return "login";
+//        }
 //        String errorMsg = "";
 //        User existingUser = userService.findUserByName(user.getName());
 //        if (existingUser != null) {
