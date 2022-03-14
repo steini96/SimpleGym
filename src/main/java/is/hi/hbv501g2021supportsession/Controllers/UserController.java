@@ -49,83 +49,80 @@ public class UserController {
         return usr;
     }
 
-//
-//    @PostMapping("/login")
-//    User @ResponseBody loginUser( @ResponseBody User user) {
-//        System.out.println(user.getName());
-//        String errorMsg = "";
-//        User existingUser = userService.findUserByName(user.getName());
-//        if (existingUser != null) {
-//            String passwords = userService.comparePasswords(existingUser, user);
-//            if (passwords == null) {
-////                return {"error":"Ers"};
-//                JSONObject();
-//                return ResponseEntity.notFound().build();
-//            }
-//            else {
-//                if (passwords.equals("match")) {
-//                    session.setAttribute("LoggedInUser", existingUser);
-//                    model.addAttribute("LoggedInUser", existingUser);
-//                }
-//                if (passwords.equals("noMatch")) {
-//                    errorMsg = "Username and password don't match";
-//                }
-//            }
-//
-//        } else {
-//            errorMsg = "Username does not exist";
-//        }
-//
-//    }
+    /**
+     * @param user
+     * @return User og 200 Http status ef successful login
+     *         annars skilar User sem hefur villuskilaboð sem nafn
+     *         og 400 (Bad request)Http status
+     */
+    @PostMapping(path= "/login",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> loginUser( @RequestBody User user) {
+        System.out.println(user.getName());
+        User existingUser = userService.findUserByName(user.getName());
+        if (existingUser != null) {
+            String passwords = userService.comparePasswords(existingUser, user);
+            if (passwords == null) {
+                User errorUser = new User();
+                errorUser.setName("Incorrect password");
+                return (new ResponseEntity<User>(errorUser,HttpStatus.BAD_REQUEST));
+            } else {
+                if (passwords.equals("match")) {
+                    return (new ResponseEntity<User>(existingUser,HttpStatus.ACCEPTED));
+                }
+                if (passwords.equals("noMatch")) {
+                    User errorUser = new User();
+                    errorUser.setName("Username and password don't match");
+                    return (new ResponseEntity<User>(errorUser,HttpStatus.BAD_REQUEST));
+                }
+            }
+
+        }
+        User errorUser = new User();
+        errorUser.setName("Username does not exist");
+        return (new ResponseEntity<>(errorUser,HttpStatus.BAD_REQUEST));
+    }
 
 
-
+    /**
+     * @param user
+     * @return User og 200 Http status ef successful signup
+     *         annars skilar User sem hefur villuskilaboð sem nafn
+     *         og 400 (Bad request)Http status
+     */
     @PostMapping(path= "/signup",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> signUpUser(@RequestBody User user) {
 
-        System.out.println("Username: " + user.getName());
-        System.out.println("Password: " + user.getLoginInfo().getPassword());
-        System.out.println("Difficulty: " + user.getUserFitnessInfo().getDifficulty().toString());
-
-        if(user.getUserFitnessInfo() != null) {
-            List<Workout> allWorkouts = workoutService.findAll();
-            System.out.println(allWorkouts.get(0).getWorkoutName());
-            user.getUserFitnessInfo().setWorkouts(allWorkouts);
-        }
-
-        System.out.println("Workout 0: " + user.getUserFitnessInfo().getWorkouts().get(0).getWorkoutName());
-        System.out.println("Workout 1: " + user.getUserFitnessInfo().getWorkouts().get(1).getWorkoutName());
+        LoginInfo login = user.getLoginInfo();
+        System.out.println(login.getPassword());
 
         User exists = userService.findUserByName(user.getName());
         if(exists != null) {
             // Username exists
-            return null;
+            User errorUser = new User();
+            errorUser.setName("Username taken");
+            return (new ResponseEntity<>(errorUser, HttpStatus.BAD_REQUEST));
         }
 
         User newUser = userService.hashPassword(user);
 
+        System.out.println(newUser.getLoginInfo().getSalt());
         if(newUser == null) {
             // Signup Error
-            return null;
+            User errorUser = new User();
+            errorUser.setName("Signup error");
+            return (new ResponseEntity<>(errorUser,HttpStatus.BAD_REQUEST));
         }
 
-        userService.saveUserFitnessInfo(newUser.getUserFitnessInfo());
+        if (newUser.getUserFitnessInfo() != null) {
+            userService.saveUserFitnessInfo(newUser.getUserFitnessInfo());
+        }
         userService.saveLoginInfo(newUser.getLoginInfo());
         userService.saveUser(newUser);
-        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+        return new ResponseEntity<>(newUser, HttpStatus.ACCEPTED);
     }
-
-    @RequestMapping(value = "/loggedin", method = RequestMethod.GET)
-    public String loggedinGET(HttpSession session, Model model){
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if(sessionUser  != null){
-            model.addAttribute("LoggedInUser", sessionUser);
-            return "loggedInPage";
-        }
-        return "redirect:/";
-    }
-
 
 }
