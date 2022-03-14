@@ -3,23 +3,13 @@ package is.hi.hbv501g2021supportsession.Controllers;
 import is.hi.hbv501g2021supportsession.Persistence.Entities.LoginInfo;
 import is.hi.hbv501g2021supportsession.Persistence.Entities.User;
 import is.hi.hbv501g2021supportsession.Persistence.Entities.UserFitnessInfo;
-import is.hi.hbv501g2021supportsession.Persistence.Entities.Workout;
 import is.hi.hbv501g2021supportsession.Services.UserService;
 import is.hi.hbv501g2021supportsession.Services.WorkoutService;
-import org.hibernate.annotations.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-
-import javax.servlet.http.HttpSession;
-import java.net.URISyntaxException;
-import java.util.List;
 
 
 @RestController
